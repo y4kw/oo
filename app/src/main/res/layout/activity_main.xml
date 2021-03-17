@@ -1,18 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
+
+<WebView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/webView1"
+    android:layout_marginTop="22dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent" />
+
+
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/fab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end|bottom"
+    android:layout_marginEnd="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="55dp"
+    android:alpha="0.33"
+    android:focusable="true"
+    android:src="@android:drawable/stat_notify_sync_noanim"
+    app:backgroundTint="@android:color/holo_blue_bright"
+    app:fabCustomSize="90dp"
+    app:maxImageSize="60dp"
+    app:rippleColor="@android:color/black"
+    app:useCompatPadding="false" />
+
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/fab1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end|bottom"
+    android:layout_marginEnd="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="155dp"
+    android:alpha="0.33"
+    android:focusable="true"
+    android:src="@android:drawable/stat_notify_sync_noanim"
+    app:backgroundTint="@android:color/holo_blue_bright"
+    app:fabCustomSize="90dp"
+    app:maxImageSize="60dp"
+    app:rippleColor="@android:color/black"
+    app:useCompatPadding="false" />
+
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar3"
+    android:layout_width="match_parent"
+    android:layout_height="22dp"
+    android:background="?attr/colorPrimary"
+    android:theme="?attr/actionBarTheme" >
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/app_name"
+        android:gravity = "center"
+        android:id="@+id/toolbar_title" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.Toolbar>
+
+
+<!--
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    android:theme="?attr/actionBarTheme" />
+    -->
+
+</FrameLayout>
