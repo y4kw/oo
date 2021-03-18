@@ -36,7 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String url;
     String urlTanki = "http://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
     String urlMe = "https://ifconfig.me";
-    String urlHimawari = "https://www.jma.go.jp/bosai/map.html#contents=himawari";
+    //String urlHimawari = "https://www.jma.go.jp/bosai/map.html#contents=himawari";
+    //String urlHimawari = "https://www.jma.go.jp/bosai/map.html#elem=vap&contents=himawari";
+    String urlHimawari = "https://www.jma.go.jp/bosai/map.html#4/40.000/110.000&elem=vap&contents=himawari";
 
     private WebView webview;
 
@@ -131,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return true;
+                return false;
             }
 
             @Override
