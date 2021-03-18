@@ -31,6 +31,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.security.AccessController;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
     //String url = "http://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
     //String url = "https://www.jma.go.jp/bosai/map.html#contents=himawari";
     String url = "https://ifconfig.me";
@@ -64,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }, 300);
 
+        getSupportActionBar().hide();
+        //getSupportActionBar().setDisplayShowTitleEnabled(true);
+        //getSupportActionBar().setTitle(url);
         log();
         setContentView(R.layout.activity_main);
 

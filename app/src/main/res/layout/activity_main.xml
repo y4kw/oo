@@ -7,11 +7,18 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".MainActivity">
 
-<WebView xmlns:android="http://schemas.android.com/apk/res/android"
+    <WebView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/webView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--
+    <WebView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/webView1"
     android:layout_marginTop="22dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
+    -->
 
 
 <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -48,6 +55,7 @@ tools:context=".MainActivity">
     app:rippleColor="@android:color/black"
     app:useCompatPadding="false" />
 
+    <!--
 <androidx.appcompat.widget.Toolbar
     android:id="@+id/toolbar3"
     android:layout_width="match_parent"
@@ -63,7 +71,7 @@ tools:context=".MainActivity">
         android:id="@+id/toolbar_title" />
 
 </androidx.appcompat.widget.Toolbar>
-
+-->
 
 <!--
 <androidx.appcompat.widget.Toolbar
