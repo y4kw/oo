@@ -25,6 +25,7 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -32,11 +33,11 @@ import java.security.AccessController;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //String url = "http://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
-    //String url = "https://www.jma.go.jp/bosai/map.html#contents=himawari";
-    String url = "https://ifconfig.me";
-    //String urlme = "https://www.jma.go.jp/bosai/map.html#contents=himawari";
-    String urlme = "http://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
+    String url;
+    String urlTanki = "http://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
+    String urlMe = "https://ifconfig.me";
+    String urlHimawari = "https://www.jma.go.jp/bosai/map.html#contents=himawari";
+
     private WebView webview;
 
     @TargetApi(Build.VERSION_CODES.O)
@@ -61,7 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .enableUrlBarHiding()
                     .setToolbarColor(Color.parseColor("#0099cc"));
             CustomTabsIntent tabsIntent = builder.build();
-            tabsIntent.launchUrl(this, Uri.parse(urlme));
+            url = urlTanki;
+            tabsIntent.launchUrl(this, Uri.parse(url));
 
         }, 300);
 
@@ -73,33 +75,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         webview = (WebView) findViewById(R.id.webView1);
 
-        //Toolbar toolbar = findViewById(R.id.toolbar3);
-        //setSupportActionBar(toolbar);
-        //toolbar.setTitle("caso");
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            CookieManager.getInstance().removeAllCookies(null);
-            CookieManager.getInstance().flush();
-        } else {
-            CookieSyncManager cookieSyncMngr =
-                    CookieSyncManager.createInstance(getApplicationContext());
-            cookieSyncMngr.startSync();
-            CookieManager cookieManager = CookieManager.getInstance();
-            cookieManager.removeAllCookie();
-            cookieManager.removeSessionCookie();
-            cookieManager.setAcceptCookie(true);
-
-            //cookieManager.setAcceptThirdPartyCookies(webview, true);
-            cookieSyncMngr.stopSync();
-            cookieSyncMngr.sync();
-        }
-
-
-        //if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB){
-        //    reloadmax = 0;
+        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        //    CookieManager.getInstance().removeAllCookies(null);
+        //    CookieManager.getInstance().flush();
         //} else {
-        //    reloadmax = 5;
+        //    CookieSyncManager cookieSyncMngr =
+        //            CookieSyncManager.createInstance(getApplicationContext());
+        //    cookieSyncMngr.startSync();
+        //    CookieManager cookieManager = CookieManager.getInstance();
+        //    cookieManager.removeAllCookie();
+        //    cookieManager.removeSessionCookie();
+        //    cookieManager.setAcceptCookie(true);
+        //    cookieSyncMngr.stopSync();
+        //    cookieSyncMngr.sync();
         //}
+
 
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
@@ -120,13 +110,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         log();
         if (savedInstanceState == null) {
             log("savedInstanceState==null");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                url = urlHimawari;
+            } else {
+                url = urlMe;
+            }
             webview.loadUrl(url);
         } else {
             log("NOTsavedInstanceState==null");
         }
-
-        ProgressDialog loading = new ProgressDialog(this);
-        loading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
@@ -135,41 +127,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         webview.setWebViewClient(new WebViewClient() {
 
-            boolean checkOnPageStartedCalled = false;
+//            boolean checkOnPageStartedCalled = false;
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                //return super.shouldOverrideUrlLoading(view, url);
                 return true;
             }
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                loading.show();
+                super.onPageStarted(view, url, favicon);
                 log();
-                //SystemClock.sleep(1000);
-                checkOnPageStartedCalled = true;
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                loading.dismiss();
                 super.onPageFinished(view, url);
-                //webview.postDelayed(new Runnable() {
-                //    @Override
-                //    public void run() {
-                //        webview.scrollTo(webview.getContentHeight(),webview.getContentHeight());
-                //    }
-                //}, 100);
-                //webview.clearCache(true);
+                log();
             }
 
-            @Override
-            public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
-                super.shouldInterceptRequest(view, url);
-                //log();
-                return null;
-            }
 
             @Override
             public void onReceivedError(WebView view, int errorCode, String description,
@@ -190,12 +166,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(returmBtn);
         }
         if (v.getId() == R.id.fab1) {
-            url = "https://www.jma.go.jp/bosai/map.html#contents=himawari";
             CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
             builder.setShowTitle(true)
                     .enableUrlBarHiding()
                     .setToolbarColor(Color.parseColor("#0099cc"));
             CustomTabsIntent tabsIntent = builder.build();
+            url = urlHimawari;
             tabsIntent.launchUrl(this, Uri.parse(url));
         }
     }
@@ -215,14 +191,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onSaveInstanceState(Bundle outState) {
         log();
         super.onSaveInstanceState(outState);
-        webview.saveState(outState);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         log();
         super.onRestoreInstanceState(savedInstanceState);
-        webview.restoreState(savedInstanceState);
     }
-
 }
