@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     String url;
     String urlTanki = "http://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf";
+    //String urlAXFE578 = "http://www.hbc.jp/tecweather/AXFE578.pdf";
+    String urlAXFE578_12 = "https://www.jma.go.jp/bosai/numericmap/data/nwpmap/axfe578_12.pdf";
+    String urlAXFE578_00 = "https://www.jma.go.jp/bosai/numericmap/data/nwpmap/axfe578_00.pdf";
+    //String urlTanki = "http://www.data.jma.go.jp/fcd/yoho/data/jishin/kaisetsu_tanki_latest.pdf;http://www.hbc.jp/tecweather/AXFE578.pdf";
     String urlMe = "https://ifconfig.me";
     //String urlHimawari = "https://www.jma.go.jp/bosai/map.html#contents=himawari";
     //String urlHimawari = "https://www.jma.go.jp/bosai/map.html#elem=vap&contents=himawari";
@@ -58,16 +62,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+
+
+        //new Handler(Looper.getMainLooper()).postDelayed(() -> {
+        //    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        //    builder.setShowTitle(true)
+        //            .enableUrlBarHiding()
+        //            .setToolbarColor(Color.parseColor("#0099cc"));
+        //    CustomTabsIntent tabsIntent = builder.build();
+        //    tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_12));
+        //    //tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_00));
+        //    //tabsIntent.launchUrl(this, Uri.parse(urlTanki));
+
+        //}, 500);
+
+        //new Handler(Looper.getMainLooper()).postDelayed(() -> {
+        //    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        //    builder.setShowTitle(true)
+        //            .enableUrlBarHiding()
+        //            .setToolbarColor(Color.parseColor("#0099cc"));
+        //    CustomTabsIntent tabsIntent = builder.build();
+        //    //tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_12));
+        //    //tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_00));
+        //    tabsIntent.launchUrl(this, Uri.parse(urlTanki));
+
+        //}, 1500);
+
+
+        new Handler(Looper.getMainLooper()).post(() -> {
             CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
             builder.setShowTitle(true)
                     .enableUrlBarHiding()
                     .setToolbarColor(Color.parseColor("#0099cc"));
             CustomTabsIntent tabsIntent = builder.build();
-            url = urlTanki;
-            tabsIntent.launchUrl(this, Uri.parse(url));
+            //tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_12));
+            //tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_00));
+            tabsIntent.launchUrl(this, Uri.parse(urlTanki));
 
-        }, 300);
+        });
 
         getSupportActionBar().hide();
         //getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -168,13 +200,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(returmBtn);
         }
         if (v.getId() == R.id.fab1) {
-            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-            builder.setShowTitle(true)
-                    .enableUrlBarHiding()
-                    .setToolbarColor(Color.parseColor("#0099cc"));
-            CustomTabsIntent tabsIntent = builder.build();
             url = urlHimawari;
-            tabsIntent.launchUrl(this, Uri.parse(url));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                webview.loadUrl(url);
+            } else {
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                builder.setShowTitle(true)
+                        .enableUrlBarHiding()
+                        .setToolbarColor(Color.parseColor("#0099cc"));
+                CustomTabsIntent tabsIntent = builder.build();
+                tabsIntent.launchUrl(this, Uri.parse(url));
+            }
         }
     }
 
