@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.browser.customtabs.CustomTabsIntent;
 
 import android.annotation.TargetApi;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.app.WallpaperInfo;
 import android.content.Context;
@@ -64,17 +65,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
 
-        //new Handler(Looper.getMainLooper()).postDelayed(() -> {
-        //    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-        //    builder.setShowTitle(true)
-        //            .enableUrlBarHiding()
-        //            .setToolbarColor(Color.parseColor("#0099cc"));
-        //    CustomTabsIntent tabsIntent = builder.build();
-        //    tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_12));
-        //    //tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_00));
-        //    //tabsIntent.launchUrl(this, Uri.parse(urlTanki));
-
-        //}, 500);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                builder.setShowTitle(true)
+                        .enableUrlBarHiding()
+                        .setToolbarColor(Color.parseColor("#0099cc"));
+                CustomTabsIntent tabsIntent = builder.build();
+                tabsIntent.intent.setPackage("com.google.android.apps.docs");
+                tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_12));
+                tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_00));
+                tabsIntent.launchUrl(this, Uri.parse(urlTanki));
+            }, 500);
+        } else {
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                builder.setShowTitle(true)
+                        .enableUrlBarHiding()
+                        .setToolbarColor(Color.parseColor("#0099cc"));
+                CustomTabsIntent tabsIntent = builder.build();
+                tabsIntent.intent.setPackage("com.google.android.apps.docs");
+                //tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_12));
+                //tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_00));
+                tabsIntent.launchUrl(this, Uri.parse(urlTanki));
+            }, 500);
+        }
 
         //new Handler(Looper.getMainLooper()).postDelayed(() -> {
         //    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
@@ -89,17 +104,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //}, 1500);
 
 
-        new Handler(Looper.getMainLooper()).post(() -> {
-            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-            builder.setShowTitle(true)
-                    .enableUrlBarHiding()
-                    .setToolbarColor(Color.parseColor("#0099cc"));
-            CustomTabsIntent tabsIntent = builder.build();
-            //tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_12));
-            //tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_00));
-            tabsIntent.launchUrl(this, Uri.parse(urlTanki));
+        //new Handler(Looper.getMainLooper()).post(() -> {
+        //    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        //    builder.setShowTitle(true)
+        //            .enableUrlBarHiding()
+        //            .setToolbarColor(Color.parseColor("#0099cc"));
+        //    CustomTabsIntent tabsIntent = builder.build();
+        //    //tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_12));
+        //    //tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_00));
+        //    tabsIntent.launchUrl(this, Uri.parse(urlTanki));
+        //});
 
-        });
+        //new Handler(Looper.getMainLooper()).post(() -> {
+        //    Intent intent = new Intent();
+        //    intent.setAction(intent.ACTION_VIEW);
+        //    intent.setData(Uri.parse(urlAXFE578_00));
+        //    startActivity(intent);
+        //});
+
+        //new Handler(Looper.getMainLooper()).post(() -> {
+        //    Intent intent = new Intent();
+        //    intent.setAction(intent.ACTION_VIEW);
+        //    intent.setData(Uri.parse(urlAXFE578_00));
+        //    startActivity(intent);
+        //    intent.setData(Uri.parse(urlTanki));
+        //    startActivity(intent);
+        //});
+
+        //new Handler(Looper.getMainLooper()).postDelayed(() -> {
+        //    Intent intent = new Intent();
+        //    intent.setAction(intent.ACTION_VIEW);
+        //    intent.setDataAndType(Uri.parse(urlAXFE578_00), "application/pdf");
+        //    startActivity(intent);
+        //}, 200);
+
+
+        //new Handler(Looper.getMainLooper()).postDelayed(() -> {
+        //    Intent intent = new Intent();
+        //    intent.setAction(intent.ACTION_VIEW);
+        //    intent.setDataAndType(Uri.parse(urlTanki), "application/pdf");
+        //    startActivity(intent);
+        //}, 5200);
+
+
+
+        //new Handler(Looper.getMainLooper()).post(() -> {
+        //    Intent intent = new Intent();
+        //    intent.setAction(intent.ACTION_VIEW);
+        //    intent.setData(Uri.parse(urlAXFE578_00));
+        //    startActivity(intent);
+        //});
 
         getSupportActionBar().hide();
         //getSupportActionBar().setDisplayShowTitleEnabled(true);
