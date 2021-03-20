@@ -74,9 +74,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 CustomTabsIntent tabsIntent = builder.build();
                 tabsIntent.intent.setPackage("com.google.android.apps.docs");
                 tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_12));
+                //tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_00));
+                //tabsIntent.launchUrl(this, Uri.parse(urlTanki));
+            }, 0);
+
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                builder.setShowTitle(true)
+                        .enableUrlBarHiding()
+                        .setToolbarColor(Color.parseColor("#0099cc"));
+                CustomTabsIntent tabsIntent = builder.build();
+                tabsIntent.intent.setPackage("com.google.android.apps.docs");
+                //tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_12));
                 tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_00));
+                //tabsIntent.launchUrl(this, Uri.parse(urlTanki));
+            }, 200);
+
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                builder.setShowTitle(true)
+                        .enableUrlBarHiding()
+                        .setToolbarColor(Color.parseColor("#0099cc"));
+                CustomTabsIntent tabsIntent = builder.build();
+                tabsIntent.intent.setPackage("com.google.android.apps.docs");
                 tabsIntent.launchUrl(this, Uri.parse(urlTanki));
-            }, 500);
+            },500);
+
+            //new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            //    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            //    builder.setShowTitle(true)
+            //            .enableUrlBarHiding()
+            //            .setToolbarColor(Color.parseColor("#0099cc"));
+            //    CustomTabsIntent tabsIntent = builder.build();
+            //    tabsIntent.intent.setPackage("com.google.android.apps.docs");
+            //    tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_12));
+            //    tabsIntent.launchUrl(this, Uri.parse(urlAXFE578_00));
+            //    tabsIntent.launchUrl(this, Uri.parse(urlTanki));
+            //}, 500);
         } else {
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
